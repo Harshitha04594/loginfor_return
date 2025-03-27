@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Agent Login</title>
+    <style>
+        body {
+            background: url('https://cdn.prod.website-files.com/605826c62e8de87de744596e/62e27ccbe934fb09ad48f438_July%20the%20ConvertCart%20Guide%20to%20Reducing%20Product%20Returns.jpg') 
+            no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 300px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            margin: 100px auto;
+            border-radius: 10px;
+            text-align: center;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Welcome Marquee -->
+    <marquee style="font-size: 20px; color: white; background: black; padding: 10px;">
+        Welcome to the AI-Powered Fraud Detection System for Product Returns
+    </marquee>
+
+    <div class="container">
+        <h2>Delivery Agent Login</h2>
+        <input type="text" id="name" placeholder="Enter your name">
+        <input type="password" id="password" placeholder="Enter your password">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <script>
+        function login() {
+            const name = document.getElementById("name").value;
+            const password = document.getElementById("password").value;
+
+            fetch("http://127.0.0.1:8000/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ name, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    alert("Login Successful!");
+                    window.location.href = "https://aipoweredfrauddetection.streamlit.app/"; // Redirect to verification page
+                } else {
+                    alert("Invalid credentials! Please try again.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred. Please try again.");
+            });
+        }
+    </script>
+
+</body>
+</html>
